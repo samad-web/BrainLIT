@@ -46,7 +46,8 @@ export default function RaceCard({ part, data }) {
           {data.found}
         </p>
       )}
-      {data?.tip && (
+      {/* Only nudge with a "Try:" tip when they haven't nailed this part yet. */}
+      {data?.status !== 'strong' && data?.tip && (
         <p className="mt-1 text-sm font-body text-neutral-600">
           <span className="font-bold">Try: </span>
           {data.tip}
