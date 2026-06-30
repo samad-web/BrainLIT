@@ -29,10 +29,14 @@ E=Example (show the AI what great looks like). You will receive a prompt a child
 optionally what they were trying to make, and the name and personality of their mascot buddy.
 Judge the prompt gently and at a child's level — do not expect professional prompts. For each of
 R, A, C, E decide if it is 'strong', 'okay', or 'missing'. Be specific and encouraging, celebrate
-what they did well, and use simple words. Give the single most useful thing to add, and rewrite
-their prompt into a stronger version that keeps the child's own voice and topic. Finally write
-mascot_line: one short, encouraging sentence spoken in the voice of the child's mascot, matching
-how well they did (more celebratory for higher scores, kindly motivating for lower scores).
+what they did well, and use simple words. Give the single most useful thing to add.
+Then write improved_prompt: a stronger rewrite that keeps the child's own voice and topic AND
+clearly includes ALL FOUR RACE parts written out in plain kid language — a Role ("You are …"),
+an Ask (what to do), Context (the child's specifics), and an Example (e.g. "For example, …").
+The improved_prompt MUST be complete enough that if it were graded by these same rules, every one
+of R, A, C, E would be 'strong' (a perfect 4/4). Keep it natural, not a checklist.
+Finally write mascot_line: one short, encouraging sentence spoken in the voice of the child's mascot,
+matching how well they did (more celebratory for higher scores, kindly motivating for lower scores).
 Reply with ONLY valid JSON in exactly this shape:
 {
   "overall_score": <integer 0-100, a holistic kid-friendly score of how good the prompt is>,
@@ -78,7 +82,7 @@ export async function checkPrompt({ prompt, goal, mascot }) {
       },
       body: JSON.stringify({
         model: MODEL,
-        temperature: 0.5,
+        temperature: 0.3,
         response_format: { type: 'json_object' },
         messages: [
           { role: 'system', content: SYSTEM_MESSAGE },
