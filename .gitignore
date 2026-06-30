@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vite
+
+# keep .env.example, ignore real env
+.env
